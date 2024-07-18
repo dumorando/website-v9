@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dumorando - dumo.network</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <audio src="oneshotphosphor.mp3" autoplay loop></audio>
+    <center>
+        <div class="content">
+            <nav>
+                <h1>navigate..</h1>
+                <button id="breakfast">
+                    breakfast's website
+                </button>
+                <button id="home">
+                    home
+                </button>
+                <button id="biography">
+                    biography
+                </button>
+                <button id="projects">
+                    projects
+                </button>
+                <button id="contact">
+                    contact me
+                </button>
+            </nav>
+            <content id="homepage">
+                <h1>hello world</h1>
+                <p>it is i. dumorando. some people question what is dumorando.</p>
+                <p>hell, some people question <i>why</i> is dumorando.</p>
+                <p>this website is here to answer all of your questions about <i>dumorando</i>.</p>
+                <div class="flex">
+                    <p><i>beware! this website has autoplaying music.</i></p> <button id="mute">mute</button>
+                </div>
+                <p><i>copyright: <a href="mailto:webmaster@dumo.network">webmaster@dumo.network</a></i></p>
+            </content>
+            <content id="biography-page">
+                <h1>biography</h1>
+                <p>i am a <b>human being</b> <i>(surprise)</i> who enjoys programming and other computer</p>
+                <p>related activities (such as <i>video gaming</i>).</p>
+                <p>check my projects page for the results of my programming enjoyment.</p>
+                <p>i am not good at art or music production, unfortunately.</p>
+            </content>
+            <content id="projects-page">
+                <h1>projects</h1>
+                <p>i make a lot of web things.</p>
+                <p>some of the more notable <i>web things</i> i have created are</p>
+                <p><a href="https://semisocial.chat">semisocial</a>,</p>
+                <p><a href="https://javascript.dumorando.com">dumo.js</a> (<i>outdated</i>),</p>
+                <p><a href="https://dumosgamemaker.vercel.app">dumos game maker</a> (<i>outdated</i>),</p>
+                <!-- <p><a href="/forums">the dumorando forums</a>,</p> -->
+                <p><a href="https://talk.dumorando.com">dumochat</a>,</p>
+                <p>and <a href="https://uwu.dumorando.com">uwuify</a></p>
+            </content>
+            <content id="contact-page">
+                <h1>contact</h1>
+                <p>you can contact me through email. my personal email address is</p>
+                <p><a href="mailto:dumorando@proton.me">dumorando@proton.me</a>.</p>
+                <p><i>please don't spam it.</i></p>
+            </content>
+        </div>
+    </center>
+    <script>
+        //play music
+
+        function play() {
+            if (!localStorage.muted) {
+                document.querySelector('audio').play()
+            }
+        }
+        document.onclick = play;
+        document.onkeydown = play;
+
+        //mute
+        function updatemutebutton() {
+            document.getElementById('mute').innerText = !!localStorage.muted ? 'unmute' : 'mute';
+        }
+        updatemutebutton();
+        document.getElementById('mute').addEventListener('click',() => {
+            if (localStorage.muted) {
+                localStorage.removeItem('muted');
+            } else {
+                localStorage.setItem('muted', 'yea');
+            }
+        });
+
+        //pages
+
+        // super cool automation 
+        var pages = {
+            "home": "homepage",
+            "biography": "biography-page",
+            "projects": "projects-page",
+            "contact": "contact-page"
+        };
+
+        function goto(page){
+            for (const [key,val] of Object.entries(pages)) {
+                if (key !== page) {
+                    //kill it
+                    document.getElementById(val).style.display = 'none';
+                } else {
+                    //show it
+                    document.getElementById(val).style.display = '';
+                }
+            }
+        }
+
+        goto('home');
+
+        for (const key of Object.keys(pages)){
+            document.getElementById(key).addEventListener('click',()=>goto(key));
+        }
+        /*
+        function handlehashchange() {
+            if (Object.keys(pages).includes(location.hash)){
+                goto(location.hash);
+            }
+        }
+        window.onhashchange = handlehashchange;
+        */
+        document.getElementById('breakfast').addEventListener('click', ()=>window.location = 'https://breakfast.pages.gay');
+    </script>
+</body>
+</html>

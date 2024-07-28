@@ -13,12 +13,13 @@ body {
 
 body::after {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: linear-gradient(to bottom, transparent, white);
+    z-index: -1;
     pointer-events: none; /* today i learned.. */
 }
 
